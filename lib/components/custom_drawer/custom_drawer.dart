@@ -3,7 +3,7 @@ import 'package:olx_clone/components/custom_drawer/custom_drawer_header.dart';
 import 'package:olx_clone/components/custom_drawer/page_section.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key key}) : super(key: key);
+  // const CustomDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

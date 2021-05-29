@@ -37,7 +37,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'OLX',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.purple,
+        appBarTheme: AppBarTheme(
+          elevation: 0
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.orange
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity
       ),
       home: BaseScreen()
