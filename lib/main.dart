@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
 import 'package:olx_clone/screens/base/base_screen.dart';
+import 'package:olx_clone/stores/page_store.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 Future main() async {
@@ -8,7 +10,13 @@ Future main() async {
 
   await dotenv.load(fileName: '.env');
   await initializeParse();
+  setupLocators();
+
   runApp(MyApp());
+}
+
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 Future initializeParse() async {

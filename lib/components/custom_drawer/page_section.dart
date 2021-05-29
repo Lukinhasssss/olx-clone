@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:olx_clone/components/custom_drawer/page_tile.dart';
+import 'package:olx_clone/stores/page_store.dart';
 
 class PageSection extends StatelessWidget {
   // const PageSection({Key key}) : super(key: key);
+
+  final PageStore pageStore = GetIt.I<PageStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -12,41 +16,41 @@ class PageSection extends StatelessWidget {
           label: 'Anúncios',
           iconData: Icons.list,
           onTap: () {
-            print('Anúncios');
+            pageStore.setPage(0);
           },
-          highlighted: true // highlighted indica se o item está selecionado
+          highlighted: pageStore.page == 0 && true // highlighted indica se o item está selecionado
         ),
         PageTile(
             label: 'Inserir Anúncio',
             iconData: Icons.edit_outlined,
             onTap: () {
-              print('Inserir Anúncio');
+              pageStore.setPage(1);
             },
-            highlighted: false // highlighted indica se o item está selecionado
+            highlighted: pageStore.page == 1 && true
         ),
         PageTile(
             label: 'Chat',
             iconData: Icons.message_outlined,
             onTap: () {
-              print('Chat');
+              pageStore.setPage(2);
             },
-            highlighted: false // highlighted indica se o item está selecionado
+            highlighted: pageStore.page == 2 && true
         ),
         PageTile(
             label: 'Favoritos',
             iconData: Icons.favorite_border_outlined,
             onTap: () {
-              print('Favoritos');
+              pageStore.setPage(3);
             },
-            highlighted: false // highlighted indica se o item está selecionado
+            highlighted: pageStore.page == 3 && true
         ),
         PageTile(
             label: 'Minha Conta',
             iconData: Icons.person_outline,
             onTap: () {
-              print('Minha Conta');
+              pageStore.setPage(4);
             },
-            highlighted: false // highlighted indica se o item está selecionado
+            highlighted: pageStore.page == 4 && true
         )
       ],
     );
