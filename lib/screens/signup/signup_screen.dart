@@ -1,16 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:olx_clone/screens/signup/signup_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:olx_clone/screens/login/login_screen.dart';
+import 'package:olx_clone/screens/signup/components/field_title.dart';
 
-class LoginScreen extends StatelessWidget {
-  // const LoginScreen({Key key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  // const SignUpScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Entrar'),
+        title: Text('Cadastro'),
         centerTitle: true
       ),
       body: Container(
@@ -28,61 +30,48 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    'Acessar com E-mail:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                    )
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 4, left: 3),
-                    child: Text(
-                      'E-mail',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700
-                      )
-                    )
-                  ),
+                  FieldTitle('Apelido', 'Como aparecerá em seus anúncios.'),
                   TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      isDense: true // Diminui um pouco a altura do input
+                      hintText: 'Exemplo: João S. Ramos',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      isDense: true
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.name
                   ),
                   SizedBox(height: 16),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 4, left: 3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Senha',
-                          style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700
-                          )
-                        ),
-                        GestureDetector(
-                          child: Text(
-                            'Esqueceu sua senha?',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.purple
-                            )
-                          ),
-                          onTap: () {
-                            print('Ir para tela de esqueceu a senha.');
-                          }
-                        )
-                      ],
-                    )
+
+                  FieldTitle('E-mail', 'Enviaremos um e-mail de confirmação.'),
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Exemplo: joao@gmail.com',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      isDense: true
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false
                   ),
+                  SizedBox(height: 16),
+
+                  FieldTitle('Celular'),
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '(99) 99999-9999',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      isDense: true
+                    ),
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      TelefoneInputFormatter()
+                    ],
+                  ),
+                  SizedBox(height: 16),
+
+                  FieldTitle('Senha', 'Use letras, números e caracteres especiais..'),
                   TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -91,11 +80,22 @@ class LoginScreen extends StatelessWidget {
                     obscureText: true
                   ),
                   SizedBox(height: 16),
+
+                  FieldTitle('Confirmar Senha'),
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      isDense: true
+                    ),
+                    obscureText: true
+                  ),
+                  SizedBox(height: 16),
+
                   Container(
                     height: 50,
                     margin: EdgeInsets.symmetric(vertical: 12),
                     child: ElevatedButton(
-                      child: Text('ENTRAR', style: TextStyle(fontSize: 18.0)),
+                      child: Text('CADASTRAR', style: TextStyle(fontSize: 18.0)),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange,
                         onPrimary: Colors.white,
@@ -106,26 +106,28 @@ class LoginScreen extends StatelessWidget {
                         elevation: 0
                       ),
                       onPressed: () {
-                        print('Fazer login');
+                        print('Criar conta');
                       }
                     )
                   ),
+
                   Divider(color: Colors.black),
+
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Wrap( // Da uma quebra de linha caso ocorra um overflow do conteúdo
-                      alignment: WrapAlignment.center,
+                    child: Row( // Da uma quebra de linha caso ocorra um overflow do conteúdo
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Não tem conta? ',
+                          'Já tem conta? ',
                           style: TextStyle(fontSize: 16)
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (_) => SignUpScreen()));
+                            Navigator.of(context).pop();
                           },
                           child: Text(
-                            'Cadastre-se',
+                            'Entrar',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: Colors.purple,
@@ -136,11 +138,11 @@ class LoginScreen extends StatelessWidget {
                       ],
                     )
                   )
-                ]
-              ),
+                ],
+              )
             )
           ),
-        ),
+        )
       )
     );
   }
