@@ -2,11 +2,14 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:olx_clone/screens/login/login_screen.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:olx_clone/screens/signup/components/field_title.dart';
+import 'package:olx_clone/stores/signup_store.dart';
 
 class SignUpScreen extends StatelessWidget {
   // const SignUpScreen({Key key}) : super(key: key);
+
+  final SignUpStore signUpStore = SignUpStore();
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +34,17 @@ class SignUpScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FieldTitle('Apelido', 'Como aparecerá em seus anúncios.'),
-                  TextField(
+                  Observer(builder: (context) => TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Exemplo: João S. Ramos',
                       hintStyle: TextStyle(color: Colors.grey[400]),
-                      isDense: true
+                      isDense: true,
+                      errorText: signUpStore.nameError
                     ),
-                    keyboardType: TextInputType.name
-                  ),
+                    keyboardType: TextInputType.name,
+                    onChanged: signUpStore.setName
+                  )),
                   SizedBox(height: 16),
 
                   FieldTitle('E-mail', 'Enviaremos um e-mail de confirmação.'),
