@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:olx_clone/helpers/extensions.dart';
+import 'package:olx_clone/models/user.dart';
+import 'package:olx_clone/repositories/user_repository.dart';
 
 part 'signup_store.g.dart';
 
@@ -103,7 +105,14 @@ abstract class _SignUpStore with Store {
   Future<void> _signUp() async {
     isLoading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    final user = User(
+      name: name,
+      email: email,
+      phone: phone,
+      password: pass1
+    );
+
+    await UserRepository().signUp(user);
 
     isLoading = false;
   }
