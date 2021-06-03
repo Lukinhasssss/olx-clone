@@ -90,4 +90,22 @@ abstract class _SignUpStore with Store {
       return 'Senhas não coincidem';
   }
 
+  @computed
+  bool get isFormValid => isNameValid && isEmailValid && isPhoneValid && isPass1Valid && isPass2Valid;
+
+  @computed
+  Function get signUpPressed => (isFormValid && !isLoading) ? _signUp : null;
+
+  @observable
+  bool isLoading = false;
+
+  @action
+  Future<void> _signUp() async {
+    isLoading = true;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    isLoading = false;
+  }
+
 }

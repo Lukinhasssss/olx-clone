@@ -44,6 +44,20 @@ mixin _$SignUpStore on _SignUpStore, Store {
       (_$isPass2ValidComputed ??= Computed<bool>(() => super.isPass2Valid,
               name: '_SignUpStore.isPass2Valid'))
           .value;
+  Computed<bool> _$isFormValidComputed;
+
+  @override
+  bool get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+              name: '_SignUpStore.isFormValid'))
+          .value;
+  Computed<Function> _$signUpPressedComputed;
+
+  @override
+  Function get signUpPressed =>
+      (_$signUpPressedComputed ??= Computed<Function>(() => super.signUpPressed,
+              name: '_SignUpStore.signUpPressed'))
+          .value;
 
   final _$nameAtom = Atom(name: '_SignUpStore.name');
 
@@ -120,6 +134,28 @@ mixin _$SignUpStore on _SignUpStore, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_SignUpStore.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  final _$_signUpAsyncAction = AsyncAction('_SignUpStore._signUp');
+
+  @override
+  Future<void> _signUp() {
+    return _$_signUpAsyncAction.run(() => super._signUp());
+  }
+
   final _$_SignUpStoreActionController = ActionController(name: '_SignUpStore');
 
   @override
@@ -185,11 +221,14 @@ email: ${email},
 phone: ${phone},
 pass1: ${pass1},
 pass2: ${pass2},
+isLoading: ${isLoading},
 isNameValid: ${isNameValid},
 isEmailValid: ${isEmailValid},
 isPhoneValid: ${isPhoneValid},
 isPass1Valid: ${isPass1Valid},
-isPass2Valid: ${isPass2Valid}
+isPass2Valid: ${isPass2Valid},
+isFormValid: ${isFormValid},
+signUpPressed: ${signUpPressed}
     ''';
   }
 }
