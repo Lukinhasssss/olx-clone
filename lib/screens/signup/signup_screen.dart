@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:olx_clone/components/error_box.dart';
 import 'package:olx_clone/screens/signup/components/field_title.dart';
 import 'package:olx_clone/stores/signup_store.dart';
 
@@ -33,6 +34,14 @@ class SignUpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Observer(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ErrorBox(
+                        message: signUpStore.error
+                      ),
+                    );
+                  }),
                   FieldTitle('Apelido', 'Como aparecerá em seus anúncios.'),
                   Observer(builder: (context) => TextField(
                     enabled: !signUpStore.isLoading,
