@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:olx_clone/helpers/extensions.dart';
 
 part 'signup_store.g.dart';
 
@@ -19,7 +20,74 @@ abstract class _SignUpStore with Store {
       return null;
     else if (name.isEmpty)
       return 'Campo obrigatório';
-    else return 'Nome muito curto';
+    else
+      return 'Nome muito curto';
+  }
+
+  @observable
+  String email;
+  
+  @action
+  void setEmail(String value) => email = value;
+
+  @computed
+  bool get isEmailValid => email != null && email.isEmailValid();
+  String get emailError {
+    if (email == null || isEmailValid)
+      return null;
+    else if (email.isEmpty)
+      return 'Campo obrigatório';
+    else
+      return 'E-mail inválido';
+  }
+
+  @observable
+  String phone;
+
+  @action
+  void setPhone(String value) => phone = value;
+
+  @computed
+  bool get isPhoneValid => phone != null && phone.length >= 14;
+  String get phoneError {
+    if (phone == null || isPhoneValid)
+      return null;
+    else if (phone.isEmpty)
+      return 'Campo obrigatório';
+    else
+      return 'Celular inválido';
+  }
+
+  @observable
+  String pass1;
+
+  @action
+  void setPass1(String value) => pass1 = value;
+
+  @computed
+  bool get isPass1Valid => pass1 != null && pass1.length >= 8;
+  String get pass1Error {
+    if (pass1 == null || isPass1Valid)
+      return null;
+    else if (pass1.isEmpty)
+      return 'Campo obrigatório';
+    else
+      return 'Senha muito curta';
+  }
+
+  @observable
+  String pass2;
+
+  @action
+  void setPass2(String value) => pass2 = value;
+
+  @computed
+  bool get isPass2Valid => pass2 != null && pass2 == pass1;
+  String get pass2Error {
+    if (pass2 == null || isPass2Valid)
+      return null;
+    else
+      return 'Senhas não coincidem';
   }
 
 }

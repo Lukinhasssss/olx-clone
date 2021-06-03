@@ -48,52 +48,60 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: 16),
 
                   FieldTitle('E-mail', 'Enviaremos um e-mail de confirmação.'),
-                  TextField(
+                  Observer(builder: (context) => TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Exemplo: joao@gmail.com',
                       hintStyle: TextStyle(color: Colors.grey[400]),
-                      isDense: true
+                      isDense: true,
+                      errorText: signUpStore.emailError
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    autocorrect: false
-                  ),
+                    autocorrect: false,
+                    onChanged: signUpStore.setEmail
+                  )),
                   SizedBox(height: 16),
 
                   FieldTitle('Celular'),
-                  TextField(
+                  Observer(builder: (context) => TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: '(99) 99999-9999',
                       hintStyle: TextStyle(color: Colors.grey[400]),
-                      isDense: true
+                      isDense: true,
+                      errorText: signUpStore.phoneError
                     ),
                     keyboardType: TextInputType.phone,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       TelefoneInputFormatter()
                     ],
-                  ),
+                    onChanged: signUpStore.setPhone
+                  )),
                   SizedBox(height: 16),
 
                   FieldTitle('Senha', 'Use letras, números e caracteres especiais..'),
-                  TextField(
+                  Observer(builder: (context) => TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      isDense: true
+                      isDense: true,
+                      errorText: signUpStore.pass1Error
                     ),
-                    obscureText: true
-                  ),
+                    obscureText: true,
+                    onChanged: signUpStore.setPass1
+                  )),
                   SizedBox(height: 16),
 
                   FieldTitle('Confirmar Senha'),
-                  TextField(
+                  Observer(builder: (context) => TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      isDense: true
+                      isDense: true,
+                      errorText: signUpStore.pass2Error
                     ),
-                    obscureText: true
-                  ),
+                    obscureText: true,
+                    onChanged: signUpStore.setPass2
+                  )),
                   SizedBox(height: 16),
 
                   Container(
