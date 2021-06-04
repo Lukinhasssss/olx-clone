@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:olx_clone/screens/signup/signup_screen.dart';
+import 'package:olx_clone/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
   // const LoginScreen({Key key}) : super(key: key);
+
+  final LoginStore loginStore = LoginStore();
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +51,16 @@ class LoginScreen extends StatelessWidget {
                       )
                     )
                   ),
-                  TextField(
+                  Observer(builder: (context) => TextField(
+                    enabled: !loginStore.isLoading,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      isDense: true // Diminui um pouco a altura do input
+                      isDense: true, // Diminui um pouco a altura do input,
+                      errorText: loginStore.emailError
                     ),
                     keyboardType: TextInputType.emailAddress,
-                  ),
+                    onChanged: loginStore.setEmail
+                  )),
                   SizedBox(height: 16),
                   Padding(
                     padding: EdgeInsets.only(bottom: 4, left: 3),
@@ -83,33 +90,39 @@ class LoginScreen extends StatelessWidget {
                       ],
                     )
                   ),
-                  TextField(
+                  Observer(builder: (context) => TextField(
+                    enabled: !loginStore.isLoading,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      isDense: true
+                      isDense: true,
+                      errorText: loginStore.passwordError
                     ),
-                    obscureText: true
-                  ),
+                    obscureText: true,
+                    onChanged: loginStore.setPassword
+                  )),
                   SizedBox(height: 16),
-                  Container(
-                    height: 50,
-                    margin: EdgeInsets.symmetric(vertical: 12),
-                    child: ElevatedButton(
-                      child: Text('ENTRAR', style: TextStyle(fontSize: 18.0)),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.orange,
-                        onPrimary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          // side: BorderSide(color: Colors.teal[800])
+                  Observer(builder: (_) {
+                    return Container(
+                      height: 50,
+                      margin: EdgeInsets.symmetric(vertical: 12),
+                      child: ElevatedButton(
+                        child: loginStore.isLoading
+                            ? CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.white))
+                            : Text('ENTRAR', style: TextStyle(fontSize: 18.0)),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.orange,
+                          onPrimary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            // side: BorderSide(color: Colors.teal[800])
+                          ),
+                          elevation: 0,
+                          onSurface: Colors.orange.withAlpha(120)
                         ),
-                        elevation: 0
-                      ),
-                      onPressed: () {
-                        print('Fazer login');
-                      }
-                    )
-                  ),
+                        onPressed: loginStore.loginPressed
+                      )
+                    );
+                  }),
                   Divider(color: Colors.black),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
