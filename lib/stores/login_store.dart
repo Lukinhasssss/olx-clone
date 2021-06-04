@@ -1,6 +1,8 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:olx_clone/helpers/extensions.dart';
 import 'package:olx_clone/repositories/user_repository.dart';
+import 'package:olx_clone/stores/user_manager_store.dart';
 
 part 'login_store.g.dart';
 
@@ -43,7 +45,7 @@ abstract class _LoginStore with Store {
 
     try {
       final user = await UserRepository().loginWithEmail(email, password);
-      print(user);
+      GetIt.I<UserManagerStore>().setUser(user);
     } catch (e) {
       error = e;
     }

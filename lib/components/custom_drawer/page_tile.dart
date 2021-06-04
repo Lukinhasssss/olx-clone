@@ -16,7 +16,7 @@ class PageTile extends StatelessWidget {
       title: Text(
         label,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 17,
           fontWeight: FontWeight.w500,
           color: highlighted ? Colors.orange : Color.fromRGBO(80, 80, 80, 1)
         ),
