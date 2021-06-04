@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:olx_clone/helpers/extensions.dart';
+import 'package:olx_clone/repositories/user_repository.dart';
 
 part 'login_store.g.dart';
 
@@ -33,11 +34,19 @@ abstract class _LoginStore with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  String error;
+
   @action
   Future<void> _login() async {
     isLoading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    try {
+      final user = await UserRepository().loginWithEmail(email, password);
+      print(user);
+    } catch (e) {
+      error = e;
+    }
 
     isLoading = false;
   }

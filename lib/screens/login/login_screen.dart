@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:olx_clone/components/error_box.dart';
 import 'package:olx_clone/screens/signup/signup_screen.dart';
 import 'package:olx_clone/stores/login_store.dart';
 
@@ -40,6 +41,14 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.grey[900],
                     )
                   ),
+                  Observer(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: ErrorBox(
+                        message: loginStore.error
+                      ),
+                    );
+                  }),
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 4, left: 3),
                     child: Text(
