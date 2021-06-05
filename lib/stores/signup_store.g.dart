@@ -54,10 +54,10 @@ mixin _$SignUpStore on _SignUpStore, Store {
   Computed<Function?>? _$signUpPressedComputed;
 
   @override
-  Function? get signUpPressed =>
-      (_$signUpPressedComputed ??= Computed<Function?>(() => super.signUpPressed,
+  Function? get signUpPressed => (_$signUpPressedComputed ??=
+          Computed<Function?>(() => super.signUpPressed,
               name: '_SignUpStore.signUpPressed'))
-          .value;
+      .value;
 
   final _$nameAtom = Atom(name: '_SignUpStore.name');
 
