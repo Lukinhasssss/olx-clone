@@ -6,7 +6,7 @@ class FieldTitle extends StatelessWidget {
   FieldTitle(this.title, [this.subtitle]);
 
   final String title;
-  final String subtitle;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ class ErrorBox extends StatelessWidget {
 
   ErrorBox({this.message});
 
-  final String message;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {

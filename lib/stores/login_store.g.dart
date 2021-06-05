@@ -9,38 +9,38 @@ part of 'login_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginStore on _LoginStore, Store {
-  Computed<bool> _$isEmailValidComputed;
+  Computed<bool>? _$isEmailValidComputed;
 
   @override
   bool get isEmailValid =>
       (_$isEmailValidComputed ??= Computed<bool>(() => super.isEmailValid,
               name: '_LoginStore.isEmailValid'))
           .value;
-  Computed<bool> _$isPasswordValidComputed;
+  Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
               name: '_LoginStore.isPasswordValid'))
           .value;
-  Computed<Function> _$loginPressedComputed;
+  Computed<Function?>? _$loginPressedComputed;
 
   @override
-  Function get loginPressed =>
-      (_$loginPressedComputed ??= Computed<Function>(() => super.loginPressed,
+  Function? get loginPressed =>
+      (_$loginPressedComputed ??= Computed<Function?>(() => super.loginPressed,
               name: '_LoginStore.loginPressed'))
           .value;
 
   final _$emailAtom = Atom(name: '_LoginStore.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
@@ -49,13 +49,13 @@ mixin _$LoginStore on _LoginStore, Store {
   final _$passwordAtom = Atom(name: '_LoginStore.password');
 
   @override
-  String get password {
+  String? get password {
     _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
-  set password(String value) {
+  set password(String? value) {
     _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
     });
@@ -79,13 +79,13 @@ mixin _$LoginStore on _LoginStore, Store {
   final _$errorAtom = Atom(name: '_LoginStore.error');
 
   @override
-  String get error {
+  String? get error {
     _$errorAtom.reportRead();
     return super.error;
   }
 
   @override
-  set error(String value) {
+  set error(String? value) {
     _$errorAtom.reportWrite(value, super.error, () {
       super.error = value;
     });

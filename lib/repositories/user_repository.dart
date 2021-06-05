@@ -8,8 +8,8 @@ class UserRepository {
   Future<User> signUp(User user) async {
     final parseUser = ParseUser(user.email, user.password, user.email);
 
-    parseUser.set<String>(keyUserName, user.name);
-    parseUser.set<String>(keyUserPhone, user.phone);
+    parseUser.set<String?>(keyUserName, user.name);
+    parseUser.set<String?>(keyUserPhone, user.phone);
     parseUser.set(keyUserType, user.type.index);
 
     final response = await parseUser.signUp();
@@ -17,11 +17,11 @@ class UserRepository {
     if (response.success) {
       return mapParseToUser(response.result);
     } else {
-      return Future.error(ParseErrors.getDescription(response.error.code));
+      return Future.error(ParseErrors.getDescription(response.error!.code)!);
     }
   }
 
-  Future<User> loginWithEmail(String email, String password) async {
+  Future<User> loginWithEmail(String? email, String? password) async {
     final parseUser = ParseUser(email, password, null);
 
     final response = await parseUser.login();
@@ -29,7 +29,7 @@ class UserRepository {
     if (response.success) {
       return mapParseToUser(response.result);
     } else {
-      return Future.error(ParseErrors.getDescription(response.error.code));
+      return Future.error(ParseErrors.getDescription(response.error!.code)!);
     }
   }
   

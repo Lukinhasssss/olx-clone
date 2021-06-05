@@ -128,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                           elevation: 0,
                           onSurface: Colors.orange.withAlpha(120)
                         ),
-                        onPressed: loginStore.loginPressed
+                        onPressed: loginStore.loginPressed as void Function()?
                       )
                     );
                   }),

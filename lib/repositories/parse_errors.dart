@@ -46,7 +46,7 @@ class ParseErrors {
     252: 'Serviço que está sendo vinculado não é suportado (UnsupportedService)'
   };
 
-  static String getDescription(int error) {
+  static String? getDescription(int error) {
     return _error[error];
   }
 }

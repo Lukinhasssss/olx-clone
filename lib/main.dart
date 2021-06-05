@@ -23,8 +23,8 @@ void setupLocators() {
 
 Future initializeParse() async {
   await Parse().initialize(
-      dotenv.env['APP_ID'],
-      dotenv.env['SERVER_URL'],
+      dotenv.env['APP_ID']!,
+      dotenv.env['SERVER_URL']!,
       clientKey: dotenv.env['CLIENT_KEY'],
       autoSendSessionId: true,
       debug: true

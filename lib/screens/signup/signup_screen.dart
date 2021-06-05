@@ -135,7 +135,7 @@ class SignUpScreen extends StatelessWidget {
                         onSurface: Colors.orange.withAlpha(120), // Serve para definir a cor do botão quando ele estiver desabilitado
                         elevation: 0
                       ),
-                      onPressed: signUpStore.signUpPressed
+                      onPressed: signUpStore.signUpPressed as void Function()?
                     )
                   )),
 

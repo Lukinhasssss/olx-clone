@@ -12,13 +12,13 @@ class User {
     this.createdAt
   });
 
-  String id;
-  String name;
-  String email;
-  String phone;
-  String password;
+  String? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? password;
   UserType type;
-  DateTime createdAt;
+  DateTime? createdAt;
 
   @override
   String toString() {
