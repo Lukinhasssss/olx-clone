@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+import 'package:olx_clone/screens/create/create_screen.dart';
 import 'package:olx_clone/screens/home/home_screen.dart';
 import 'package:olx_clone/stores/page_store.dart';
 
@@ -34,7 +35,7 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: NeverScrollableScrollPhysics(), // Para impedir a rolagem da tela
         children: [
           HomeScreen(),
-          Container(color: Colors.green),
+          CreateScreen(),
           Container(color: Colors.blue),
           Container(color: Colors.deepPurple),
           Container(color: Colors.deepOrange)
